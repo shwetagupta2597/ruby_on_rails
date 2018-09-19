@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @title %> </title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" >
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="assets/jquery-3.3.1.min.js"></script>
+    <script>
+    function login()
+    {
+        var email = document.getElementById("email");
+        var password =document.getElementById("password");
+        var emailLabel = document.getElementById("email-label");
+        var pwdLabel = document.getElementById("password-label");
+        var successLabel = document.getElementById("success-label");
+        if(email!=null && password!=null)
+        {
+            document.cookie = "username=admin;";
+        }
+
+        if(isBlank(email.value))
+        {
+            emailLabel.style.display="initial";
+            emailLabel.innerHTML = "Email cant be blank";
+            emailLabel.style.color="red";
+            emailLabel.style.fontSize="15px";
+            emailLabel.style.marginTop="10px"; 
+        }
+        if(isBlank(password.value))
+        {
+            pwdLabel.style.display="initial";
+            pwdLabel.innerHTML ="password cant be blank";
+            pwdLabel.style.color="red";
+            pwdLabel.style.fontSize="15px";
+            pwdLabel.style.marginTop="10px";  
+        }
+        if(valid(email.value,password.value))
+        {
+            successLabel.style.display="initial";
+            successLabel.innerHTML ="Incorrect Details";
+            successLabel.style.color="red";
+            successLabel.style.fontSize="15px"; 
+            successLabel.style.marginTop="10px";  
+            
+        }
+        return false;
+
+        function isBlank(email)
+        {
+            if(email==""|| email==null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function valid(email,pwd)
+        {
+            var cookieArray = document.cookie.split("=");
+            if(cookieArray[1].length!=0)
+            {
+                if(email=="admin" && pwd=="admin")
+                {
+                    successLabel.style.display="initial";
+                    successLabel.innerHTML="Registered Successfully";
+                    successLabel.style.display="block";
+                    successLabel.style.color="green";
+                    successLabel.style.fontSize="15px"; 
+                    successLabel.style.marginTop="10px";
+
+                    window.location = "dash_upload.html";
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+            else
+            {
+                window.location("login.html");
+            }
+            
+        }
+        
+    }
+
+    function emailFocus()
+    {
+        var emailLabel = document.getElementById("email-label");
+        var successLabel = document.getElementById("success-label");
+        emailLabel.style.display="none";
+        successLabel.style.display="none";
+        
+    }
+    function passwordFocus()
+    {
+        var passwordLabel = document.getElementById("password-label");
+        var successLabel = document.getElementById("success-label");
+        passwordLabel.style.display="none";
+        successLabel.style.display="none";
+    }
+
+    
+    window.onload = function(e)
+    {
+        if(document.url == "/dash_upload.html")
+        {
+                console.log("started");
+                var cookieArray = document.cookie.split("=");
+                console.log(cookieArray[1]);
+                if(cookieArray[1]==null || cookieArray[1] == "")
+                {
+                    console.log("inside fun");
+                    window.location="login.html";
+                }
+                console.log("end");
+            
+            function logout()
+            {
+                
+                document.cookie = "username=";
+                window.location("login.html");
+            }
+        }
+    }
+
+    </script>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% flash.each do |name,value| %>
+        <h5 class="text-center"><%= value %></h5>
+        
+        <% end%>
+    <%= yield %>
+  </body>
+</html>

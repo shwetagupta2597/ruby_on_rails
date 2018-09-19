@@ -1,0 +1,120 @@
+<head>
+<% @title="Dashboard" %>
+<link rel="stylesheet" href="/css/dash_upload_style.css">
+</head>
+<body>
+<nav class="navbar" style="width: 100%">
+        <a class="navbar-brand" href="#">
+          <img src="http://www.terralogic.com/wp-content/themes/terralogic/img/images/Terralogic_Logo_B.png" width="150" height="45" class="d-inline-block align-top" >
+        </a>
+        <div class="d-inline-block align-right">
+
+        <%= button_to 'Logout', {:action => 'logout'} %>
+
+       
+        </div>
+</nav>
+<div class="container-fluid prop">
+    <div class="row">
+    <div class="col-md-2">
+        <ul class="list">
+            <li>
+                <a class="item" href="dash_upload.html">
+                <span><i class="material-icons">note_add</i>Upload</span>
+                </a>
+            </li>
+            <li>
+                <a class="item" href="dash_details_form.html">
+                   <span><i class="material-icons">featured_play_list</i>Form</span>
+                </a>
+            </li>
+            <li>
+                <a class="item">
+                   <span><i class="material-icons">note_add</i>Dashboard</span>
+                </a>
+            </li>
+            </ul>
+    </div>
+    <div class="col-md-10">
+            <div class="container-fluid">
+                    <!--First Row-->
+                    <div class="row">
+                        <!--First Column-->
+                        <div class="col-sm-2"></div>
+                        <!--Second Column-->
+                        <div class="col-sm-8 upload-container">
+                            <h1 class="text-center">Upload Files</h1>
+                            <div class="row drop-files">
+                                <div class="col text-center">
+                                    <img src="/doc.png" alt="pdf" class="img-responsive" id="doc">
+                                    <img src="/pdf.png" alt="pdf" class="img-responsive" id="pdf">
+                                    <img src="/xls.png" alt="pdf" class="img-responsive" id="xls">
+                                    <h4></h4>
+                                </div>
+                                <!-- <div class="row upload-wrapper" style="width: 109%; background-color: #FAFAFA;"> -->
+                                <!-- </div> -->
+                            </div>                
+                           
+
+                            <%= form_for :upload, url: welcome_uploadFile_path do |f| %>
+                                <%= f.file_field :file %>
+                                <%= f.submit :Upload %>
+                              <% end %>
+                            <br/>
+                              <%= link_to "Download PDF file" ,controller: "welcome", action: "resumedownload", format: 'pdf' %>
+
+                        </div>
+                        <div style="">
+                        <span id="file_content">
+                        </span>
+                        </div>
+                        <!--Third Column-->
+                        <div class="col-sm-2"></div>
+                    </div>
+                </div>
+               
+                <script type="text/javascript">
+                    var selectedFile;
+                    window.onload = function () {
+                        var fileupload = document.getElementById("FileUpload1");
+                        var filePath = document.getElementById("spnFilePath");
+                        var button = document.getElementById("btnFileUpload");
+                        button.onclick = function () {
+                            fileupload.click();
+                        };
+            
+                        fileupload.onchange = function () {
+                            var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
+                            filePath.innerHTML = "<b>Selected File: </b>" + fileName;
+                            
+
+
+                            
+                        };
+
+
+                        
+                    };
+                </script>
+               
+    </div>
+    </div>
+</div>
+</div>
+</body>
+
+
+<script>
+
+function logout(){
+            console.log("Inside Logout");
+            email = null;
+            password = null;
+            #session[:email]=null;
+           # console.log("Session", session[:email])
+
+            window.location = "login.html"
+        }
+        </script>
+
+

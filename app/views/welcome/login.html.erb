@@ -1,0 +1,73 @@
+<head>
+<% @title="Login" %>
+<link rel="stylesheet" href="/css/login_style.css">
+</head>
+<body>
+   <div class="container-fluid">
+   <div class="row">
+       <div class="col-sm-1">
+       </div>
+       <div class="col-sm-10 white">
+           <div class="row">
+               <div class="col-sm-1">
+                   <div class="col-sm-4">
+                       <img src="/terra.jpg" class="image">
+                   </div>
+                   <div class="col-sm-8 welcome" >
+                       <span>Terralogic</span>
+                   </div>
+               </div>
+               <div class="col-sm-7 blue content">
+                   <div class="splash-text">
+                       <h3 class="block-icons">Welcome to TERRALOGIC</h3>
+                       <span class="block-icons">Inkling Client</span> 
+                       <span class="block-icons">Project Admin Board</span>
+                   </div>
+                   <span style="display:block; margin-top: 100px">
+                       <i class="fa fa-facebook">  </i>
+                       <i class="fa fa-instagram pad-lft">  </i>
+                       <i class="fa fa-twitter pad-lft">  </i>
+                       <i class="fa fa-linkedin-square pad-lft">  </i>
+                   </span>
+               </div>
+               
+               <div class="col-sm-4 login-area text-style">
+               <span class="login-text">Login</span> to your account to browse through projects and explore our tools.
+               <h5><%= @result_error %> </h5>
+               <%= form_with local: true , :method => "post" do |form| %>
+                   <p>
+                       <%= form.email_field :email, 
+                       :class => "form-control pad",
+                       :placeholder => "EMAIL",
+                       :id => "email"  %>
+                       <span id="email-label"></span>
+                   </p>
+                   <p>
+                       <%= form.password_field :password, 
+                       :class => "form-control pad",
+                       :placeholder => "PASSWORD",
+                       :id => "password" %>
+                       <span id="password-label"></span>
+                   </p>
+                   <p class = "btn-line">
+                       <%= form.button fa_icon("arrow-right"), 
+                       :class => "button_login",
+                       :type => "submit",
+                       :onclick => "return login()" %>
+                   </p>
+               <% end %>
+
+               </div>
+               
+                      
+               </div>
+           </div>
+       </div>
+       <div class="col-sm-1">
+
+       </div>
+   </div>
+</div>
+    <script href="/js/main.js"></script>
+    </body>
+    
