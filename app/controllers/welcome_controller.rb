@@ -84,16 +84,7 @@ def uploadFile
  $contentsArray= []
  $tl_contents= []
 
-  #  if uploaded_io.original_filename.match /.docx/
-  #    name = uploaded_io.original_filename
-  #    upload(name)
-# puts "Name!!!! #{name}"
-#   else
-#     flash[:error] = "Invalid Format. Please upload the file with .docx format"
-#      redirect_to :controller => 'welcome',
-#      :action => 'dash_upload'
-#   end
-#puts "Filename!!!!!!....#{uploaded_io.original_filename}"
+
    uploaded_io=params[:upload][:file]
    File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
    file.write(uploaded_io.read)
